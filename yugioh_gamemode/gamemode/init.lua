@@ -93,14 +93,11 @@ function InitializeDuelData(ply)
 end
 
 
-
 function PlayerHasSavedDeck(ply)
     local steamID = ply:SteamID64()
     local result = sql.QueryValue("SELECT steamid64 FROM player_decks WHERE steamid64 = " .. sql.SQLStr(steamID))
     return result ~= nil
 end
-
-
 
 
 
@@ -112,12 +109,9 @@ hook.Add("PlayerInitialSpawn", "InitializeDuelDataOnJoin", function(ply)
         InitializeDuelData(ply)
     print("PlayerInitialSpawn called for:", ply:Nick())
     AssignDeck(ply)
-    SetupZones(ply)
-    end)
-	
-	
+    --SetupZones(ply)
+    end)	
 end)
-
 
 
 
@@ -125,7 +119,6 @@ end)
 hook.Add("PlayerDisconnected", "SaveDeckOnDisconnect", function(ply)
     SavePlayerDeck(ply)
 end)
-
 
 function BeginDuel(ply, cmd, args)
     local players = player.GetAll()
